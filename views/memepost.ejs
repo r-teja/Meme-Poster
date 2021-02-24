@@ -1,0 +1,18 @@
+<%- include("header"); -%>
+    <%data.forEach(function(element){%>
+        <div class="container-fluid memes">
+            <div id="meme_text">
+                <img id="icon" src="/images/default_icon.png" alt="">
+                <h4>
+                    <%=element.name%>
+                </h4>
+            </div>
+            <div>
+                <p id="caption">
+                    <%=element.caption%>
+                </p>
+            </div>
+            <img src=<%=element.image_url%> alt="no image found">
+        </div>
+        <%})%>
+            <%- include("footer"); -%>

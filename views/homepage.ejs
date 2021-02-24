@@ -1,0 +1,98 @@
+<%- include("header"); -%>
+    <div class="container-fluid memes form-memes">
+        <h3>Post your memes here </h3>
+        <form action="/" method="post">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3"><label><strong>Name :</strong></label></div>
+                    <div class="col-sm-9"><input type="text" name="name" class="form-control"
+                            placeholder="Enter your name here"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3"><label><strong>Caption :</strong></label></div>
+                    <div class="col-sm-9"><input type="text" name="caption" class="form-control"
+                            placeholder="Enter your Caption here">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3"><label><strong>Image URL :</strong></label></div>
+                    <div class="col-sm-9"><input type="text" name="url" class="form-control"
+                            placeholder="Enter your image URL here">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit <i class="fa fa-check-circle" aria-hidden="true"></i></button>
+        </form>
+    </div>
+    <%data.forEach(function(element){%>
+        <div class="container-fluid memes">
+            <div id="meme_text">
+                <img id="icon" src="/images/my_profile.jpg" alt="">
+                <h4>
+                    <%=element.name%>
+                </h4>
+            </div>
+            <div>
+                <p id="caption">
+                    <%=element.caption%>
+                </p>
+            </div>
+            <img src=<%=element.image_url%> alt="no image found">
+            <button type="button" class="btn btn-danger">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal<%= element._id %>" >
+                Edit
+            </button>
+            <div class="modal fade" id="myModal<%= element._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit your meme here</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/memes/<%=element._id%>" method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-3"><label><strong>Memer :</strong></label></div>
+                                        <div class="col-sm-9"><input type="text" name="name" class="form-control"
+                                                value="<%=element.name %>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-3"><label><strong>Caption :</strong></label></div>
+                                        <div class="col-sm-9"><input type="text" name="caption" class="form-control"
+                                                value="<%=element.caption %>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-3"><label><strong>Image URL :</strong></label></div>
+                                        <div class="col-sm-9"><input type="text" name="image_url" class="form-control"
+                                                value="<%=element.image_url%>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%})%>
+            <%- include("footer"); -%>
